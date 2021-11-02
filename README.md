@@ -13,7 +13,9 @@ PS：Web服务和客户端可以都在同一本地计算机；客户端可以是
 #### 软件架构
 软件架构说明
 服务端：WebService+axis+mybatis
+
 服务端开发环境：jdk8，mysql8.0，tomcat9.0，IDEA2021
+
 客户端：基于Springboot来整合axis客户端
 
 #### 安装教程
