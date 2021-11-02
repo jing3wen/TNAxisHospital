@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="main.java.mapper.OrderMapper">
+
+  <resultMap id="BaseResultMap" type="main.java.entity.Order">
+    <id column="ID" jdbcType="INTEGER" property="id"/>
+    <result column="DATE" jdbcType="TIMESTAMP" property="date"/>
+    <result column="USER_PHONE" jdbcType="VARCHAR" property="userPhone"/>
+    <result column="REGISTRATION_ID" jdbcType="INTEGER" property="registrationId"/>
+    <result column="DEPARTMENT" jdbcType="VARCHAR" property="department"/>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    `ID`, `DATE`, `USER_PHONE`, `REGISTRATION_ID`, `DEPARTMENT`
+  </sql>
+  <select id="selectByExample" parameterType="main.java.entity.OrderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List"/>
+    from `order`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from `order`
+    where `ID` = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `order`
+    where `ID` = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="main.java.entity.OrderExample">
+    delete from `order`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </delete>
+  <insert id="insert" parameterType="main.java.entity.Order">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `order` (
+      `DATE`, 
+      `USER_PHONE`, 
+      `REGISTRATION_ID`, 
+      `DEPARTMENT`
+    )
+    values (
+      #{date,jdbcType=TIMESTAMP}, 
+      #{userPhone,jdbcType=VARCHAR}, 
+      #{registrationId,jdbcType=INTEGER}, 
+      #{department,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Order">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `order`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="date != null">
+      `DATE`,
+      </if>
+      <if test="userPhone != null">
+      `USER_PHONE`,
+      </if>
+      <if test="registrationId != null">
+      `REGISTRATION_ID`,
+      </if>
+      <if test="department != null">
+      `DEPARTMENT`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="date != null">
+      #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userPhone != null">
+      #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="registrationId != null">
+      #{registrationId,jdbcType=INTEGER},
+      </if>
+      <if test="department != null">
+      #{department,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="main.java.entity.OrderExample" resultType="java.lang.Integer">
+    select count(*) from `order`
+    <if test="_parameter != null">
+    <include refid="Example_Where_Clause"/>
+    </if>
+  </select>
+
+  <update id="updateByExampleSelective" parameterType="map">
+    update `order`
+    <set>
+      <if test="record.date != null">
+      `DATE` = #{record.date,jdbcType=TIMESTAMP}, 
+      </if>
+      <if test="record.userPhone != null">
+      `USER_PHONE` = #{record.userPhone,jdbcType=VARCHAR}, 
+      </if>
+      <if test="record.registrationId != null">
+      `REGISTRATION_ID` = #{record.registrationId,jdbcType=INTEGER}, 
+      </if>
+      <if test="record.department != null">
+      `DEPARTMENT` = #{record.department,jdbcType=VARCHAR}
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update `order`
+    <set>
+      `DATE` = #{record.date,jdbcType=TIMESTAMP}, 
+      `USER_PHONE` = #{record.userPhone,jdbcType=VARCHAR}, 
+      `REGISTRATION_ID` = #{record.registrationId,jdbcType=INTEGER}, 
+      `DEPARTMENT` = #{record.department,jdbcType=VARCHAR}
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="main.java.entity.Order">
+    update `order`
+    <set>
+      <if test="date != null">
+      `DATE` = #{date,jdbcType=TIMESTAMP}, 
+      </if>
+      <if test="userPhone != null">
+      `USER_PHONE` = #{userPhone,jdbcType=VARCHAR}, 
+      </if>
+      <if test="registrationId != null">
+      `REGISTRATION_ID` = #{registrationId,jdbcType=INTEGER}, 
+      </if>
+      <if test="department != null">
+      `DEPARTMENT` = #{department,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where `ID` = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="main.java.entity.Order">
+    update `order`
+    <set>
+      `DATE` = #{date,jdbcType=TIMESTAMP}, 
+      `USER_PHONE` = #{userPhone,jdbcType=VARCHAR}, 
+      `REGISTRATION_ID` = #{registrationId,jdbcType=INTEGER}, 
+      `DEPARTMENT` = #{department,jdbcType=VARCHAR}
+    </set>
+    where `ID` = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAllOrder" resultMap="BaseResultMap">
+    select * from `order`
+  </select>
+  <select id="selectOrderByUserPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from `order` where USER_PHONE = #{userPhone,jdbcType=VARCHAR}
+  </select>
+  <delete id="delectOrderById" parameterType="java.lang.Integer">
+    delete from `order` where ID = #{Id,jdbcType=INTEGER}
+  </delete>
+</mapper>

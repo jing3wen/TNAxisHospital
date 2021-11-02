@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.java.main" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.java.main" xmlns:intf="http://service.java.main" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://service.java.main" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="dateString" type="xsd:string"/>
+   <element name="department" type="xsd:string"/>
+   <element name="queryRegistrationByDateAndDepartmentReturn" type="xsd:string"/>
+   <element name="queryALLRegistrationReturn" type="xsd:string"/>
+   <element name="dateString1" type="xsd:string"/>
+   <element name="dateStringToDateReturn" type="xsd:dateTime"/>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="queryRegistrationByDateAndDepartmentRequest">
+
+      <wsdl:part element="impl:dateString" name="dateString"/>
+
+      <wsdl:part element="impl:department" name="department"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="dateStringToDateRequest">
+
+      <wsdl:part element="impl:dateString1" name="dateString"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="queryRegistrationByDateAndDepartmentResponse">
+
+      <wsdl:part element="impl:queryRegistrationByDateAndDepartmentReturn" name="queryRegistrationByDateAndDepartmentReturn"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="queryALLRegistrationRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="dateStringToDateResponse">
+
+      <wsdl:part element="impl:dateStringToDateReturn" name="dateStringToDateReturn"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testRegistrationServiceResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="queryALLRegistrationResponse">
+
+      <wsdl:part element="impl:queryALLRegistrationReturn" name="queryALLRegistrationReturn"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testRegistrationServiceRequest">
+
+   </wsdl:message>
+
+   <wsdl:portType name="RegistrationService">
+
+      <wsdl:operation name="queryRegistrationByDateAndDepartment" parameterOrder="dateString department">
+
+         <wsdl:input message="impl:queryRegistrationByDateAndDepartmentRequest" name="queryRegistrationByDateAndDepartmentRequest"/>
+
+         <wsdl:output message="impl:queryRegistrationByDateAndDepartmentResponse" name="queryRegistrationByDateAndDepartmentResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testRegistrationService">
+
+         <wsdl:input message="impl:testRegistrationServiceRequest" name="testRegistrationServiceRequest"/>
+
+         <wsdl:output message="impl:testRegistrationServiceResponse" name="testRegistrationServiceResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="queryALLRegistration">
+
+         <wsdl:input message="impl:queryALLRegistrationRequest" name="queryALLRegistrationRequest"/>
+
+         <wsdl:output message="impl:queryALLRegistrationResponse" name="queryALLRegistrationResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="dateStringToDate" parameterOrder="dateString">
+
+         <wsdl:input message="impl:dateStringToDateRequest" name="dateStringToDateRequest"/>
+
+         <wsdl:output message="impl:dateStringToDateResponse" name="dateStringToDateResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="RegistrationServiceSoapBinding" type="impl:RegistrationService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="queryRegistrationByDateAndDepartment">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="queryRegistrationByDateAndDepartmentRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="queryRegistrationByDateAndDepartmentResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testRegistrationService">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="testRegistrationServiceRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testRegistrationServiceResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="queryALLRegistration">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="queryALLRegistrationRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="queryALLRegistrationResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="dateStringToDate">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="dateStringToDateRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="dateStringToDateResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="RegistrationServiceService">
+
+      <wsdl:port binding="impl:RegistrationServiceSoapBinding" name="RegistrationService">
+
+         <wsdlsoap:address location="http://localhost:8080//services/main/java/service/RegistrationService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

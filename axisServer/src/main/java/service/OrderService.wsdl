@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.java.main" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.java.main" xmlns:intf="http://service.java.main" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://service.java.main" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="userPhone" type="xsd:string"/>
+   <element name="deleteOrderByPhoneReturn" type="xsd:string"/>
+   <element name="userPhone1" type="xsd:string"/>
+   <element name="dateString" type="xsd:string"/>
+   <element name="department" type="xsd:string"/>
+   <element name="insertOrderReturn" type="xsd:string"/>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="deleteOrderByPhoneResponse">
+
+      <wsdl:part element="impl:deleteOrderByPhoneReturn" name="deleteOrderByPhoneReturn"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testFunctionResponse">
+
+   </wsdl:message>
+
+   <wsdl:message name="insertOrderResponse">
+
+      <wsdl:part element="impl:insertOrderReturn" name="insertOrderReturn"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="testFunctionRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="insertOrderRequest">
+
+      <wsdl:part element="impl:userPhone1" name="userPhone"/>
+
+      <wsdl:part element="impl:dateString" name="dateString"/>
+
+      <wsdl:part element="impl:department" name="department"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="deleteOrderByPhoneRequest">
+
+      <wsdl:part element="impl:userPhone" name="userPhone"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="OrderService">
+
+      <wsdl:operation name="deleteOrderByPhone" parameterOrder="userPhone">
+
+         <wsdl:input message="impl:deleteOrderByPhoneRequest" name="deleteOrderByPhoneRequest"/>
+
+         <wsdl:output message="impl:deleteOrderByPhoneResponse" name="deleteOrderByPhoneResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testFunction">
+
+         <wsdl:input message="impl:testFunctionRequest" name="testFunctionRequest"/>
+
+         <wsdl:output message="impl:testFunctionResponse" name="testFunctionResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="insertOrder" parameterOrder="userPhone dateString department">
+
+         <wsdl:input message="impl:insertOrderRequest" name="insertOrderRequest"/>
+
+         <wsdl:output message="impl:insertOrderResponse" name="insertOrderResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="OrderServiceSoapBinding" type="impl:OrderService">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="deleteOrderByPhone">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="deleteOrderByPhoneRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="deleteOrderByPhoneResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="testFunction">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="testFunctionRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="testFunctionResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="insertOrder">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="insertOrderRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="insertOrderResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="OrderServiceService">
+
+      <wsdl:port binding="impl:OrderServiceSoapBinding" name="OrderService">
+
+         <wsdlsoap:address location="http://localhost:8080//services/main/java/service/OrderService"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

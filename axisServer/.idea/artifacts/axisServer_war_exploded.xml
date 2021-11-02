@@ -1,0 +1,27 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="axisServer:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/axisServer_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="axisServer/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="axisServer" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/lib/axis.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/saaj.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/jaxrpc.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/junit-4.12.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/log4j-1.2.8.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/wsdl4j-1.5.1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/mybatis-3.5.6.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/lombok-1.18.22.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/commons-discovery-0.2.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/commons-logging-1.0.4.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/jackson-annotations-2.11.0.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/mysql-connector-java-8.0.20.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

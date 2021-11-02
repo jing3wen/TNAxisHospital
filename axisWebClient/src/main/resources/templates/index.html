@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap 实例</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="row clearfix">
+    <div class="col-md-12 column">
+      <h3>
+        如何使用该系统
+      </h3>
+      <p class="lead">
+        <em>注意</em>
+        <br/>1.输入的日期在两天以内
+        <br/>2.若系统无反应，请检查输入数据是否正确
+        <br/>3.本项目没有对输入的数据进行校验，不太稳定
+
+      </p>
+    </div>
+  </div>
+  <div class="row clearfix">
+    <div class="col-md-6 column">
+      <h3 class="text-center">
+        查询可预约号
+      </h3>
+      <form class="form-horizontal" role="form" id="form1" name="form1">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">请输入日期</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="格式2021-11-15" id="date" name="date"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 control-label">科室</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="department" placeholder="内科或外科" name="department"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+              <label><input type="checkbox" />记住我</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-default" onclick="button_findNumCLick()">查询</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6 column">
+      <h3 class="text-center">
+        可以预约，输入手机号
+      </h3>
+      <form class="form-horizontal" role="form" name="form2">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">用户电话</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder="请输入用户电话"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+              <label><input type="checkbox" />记住我</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="button" class="btn btn-default" id="button_Order" onclick="button_OrderFunction()">点我预约</button>
+            <button type="button" class="btn btn-default" id="button_CancelOrder" onclick="button_CancelOrderFunction()">取消预约</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  function button_findNumCLick() {
+    var data={
+      "dateString": form1.date.value ,
+      "department": form1.department.value
+    }
+    if(daysDistance(today(),data.dateString)>2){
+      console.log(daysDistance(today(),data.dateString))
+      alert("不在预定日期内")
+      return;
+    }
+    $.post("/queryRegistrationByDateAndDepartment",data,function(data,status){
+      console.log(data)
+      alert(data);
+    })
+  }
+
+  function button_OrderFunction() {
+    var data={
+      "userPhone": form2.userPhone.value,
+      "dateString": form1.date.value ,
+      "department": form1.department.value
+    }
+    if(daysDistance(today(),data.dateString)>2){
+      alert("不在预定日期内")
+      return;
+    }
+    if(!validatePhone(data.userPhone)){
+      alert("电话号码格式错误")
+      return;
+    }
+
+    $.post("/insertOrderFunction",data,function(data,status){
+      alert(data);
+    })
+  }
+
+  function button_CancelOrderFunction() {
+    var data={
+      "userPhone": form2.userPhone.value
+    }
+
+    if(!validatePhone(data.userPhone)){
+      alert("电话号码格式错误")
+      return;
+    }
+
+    $.post("/deleteOrderByPhoneFunction",data,function(data,status){
+      console.log(data)
+      alert(data);
+    })
+  }
+
+  //JS 验证电话号码
+  function validatePhone(val){
+    var isPhone = /^([0-9]{3,4}-)?[0-9]{7,8}$/;//手机号码
+    var isMob= /^0?1[3|4|5|8][0-9]\d{8}$/;// 座机格式
+    if(isMob.test(val)||isPhone.test(val)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  //date1和date2是2019-06-18格式
+  function daysDistance(date1, date2) {
+    //parse() 是 Date 的一个静态方法 , 所以应该使用 Date.parse() 来调用，而不是作为 Date 的实例方法。返回该日期距离 1970/1/1 午夜时间的毫秒数
+    date1 = Date.parse(date1);
+    date2 = Date.parse(date2);
+    //计算两个日期之间相差的毫秒数的绝对值
+    var distance= Math.abs(date2 - date1);
+    //毫秒数除以一天的毫秒数,就得到了天数
+    var days = Math.floor(distance / (24 * 3600 * 1000));
+    return days ;
+  };
+
+  //获取格式化的日期
+  function today(){
+    var today=new Date();
+    var str="";
+    str+=today.getFullYear()+"-";
+    var month=today.getMonth()+1;//返回值是 0（一月） 到 11（十二月） 之间的一个整数。
+    if(month<10){
+      str+="0";
+    }
+    str+=month+"-";
+    var day=today.getDate();//返回值是 1 ~ 31 之间的一个整数
+    if(day<10){
+      str+="0";
+    }
+    str+=day;
+    return str;
+  }
+</script>
+</body>
+</html>

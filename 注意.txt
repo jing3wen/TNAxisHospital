@@ -1,0 +1,3 @@
+axisServer用tomcat打包，端口8080
+数据库用mybatis框架，请修改配置文件mybatis-config.xml
+axisWebClient基于springboot来做
