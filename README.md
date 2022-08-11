@@ -24,7 +24,10 @@ PS：Web服务和客户端可以都在同一本地计算机；客户端可以是
 
 #### 使用说明
 
-后续补上
+## 关于这个项目本人写了个博客
+https://www.cnblogs.com/jwAItn/articles/15530103.html
+
+## 有啥问题（代码跑不动，看不懂）欢迎留言，平均24小时在线一次 :full_moon_with_face:  :full_moon_with_face:  :full_moon_with_face: 
 
 #### 参与贡献
 
