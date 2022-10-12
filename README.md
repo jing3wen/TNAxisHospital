@@ -5,7 +5,8 @@
 ### 关于这个项目本人写了个博客
 https://www.cnblogs.com/jwAItn/articles/15530103.html
 
-#### 本项目  [_码云仓库_](https://gitee.com/jing3wen/TNAxisHospital)  已与 [_GitHub仓库_](https://github.com/jing3wen/TNAxisHospital) 同步更新，更新以码云仓库为主, 有啥问题（代码跑不动，看不懂）欢迎留言，基本上24小时上线登陆一次 :full_moon_with_face:  :full_moon_with_face:  :full_moon_with_face: 急的话建议直接邮件1584591284@qq.com
+#### 本项目  [_码云仓库_](https://gitee.com/jing3wen/TNAxisHospital)  已与 [_GitHub仓库_](https://github.com/jing3wen/TNAxisHospital) 同步更新，更新以码云仓库为主, 
+#### 有啥问题（代码跑不动，看不懂）欢迎留言，基本上24小时上线登陆一次 :full_moon_with_face:  :full_moon_with_face:  :full_moon_with_face: 急的话建议直接邮件1584591284@qq.com
 
 #### 介绍
 用Web service开发一个简单的就诊预约系统，实现如下基本功能：
