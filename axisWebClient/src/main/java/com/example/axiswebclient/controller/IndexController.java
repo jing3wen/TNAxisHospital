@@ -31,7 +31,7 @@ public class IndexController {
 
     @RequestMapping("/queryRegistrationByDateAndDepartment")
     public String queryRegistrationByDateAndDepartmentController(String dateString,String department){
-        System.out.println("收到前端查询的queryRegistrationByDateAndDepartment");
+        System.out.println("用户查询 时间:"+dateString+", 科室:"+department+" 可预约的号码");
         //SimpleDateFormat fm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //String dateString=fm.format(registration.getDate());
         String res=registrationService.queryRegistrationByDateAndDepartmentFunction(dateString,department);
@@ -41,7 +41,7 @@ public class IndexController {
 
     @RequestMapping("/insertOrderFunction")
     public String insertOrderFunctionController(String userPhone,String dateString,String department){
-        System.out.println("收到前端查询的insertOrderFunction");
+        System.out.println("用户:"+userPhone+"  预约科室:"+department+" ,时间:"+dateString);
         String res=orderService.insertOrderFunction(userPhone,dateString,department);
         System.out.println("res:"+res);
         return res;
@@ -49,7 +49,7 @@ public class IndexController {
 
     @RequestMapping("/deleteOrderByPhoneFunction")
     public String deleteOrderByPhoneFunctionController(String userPhone){
-        System.out.println("收到前端查询的insertOrderFunction");
+        System.out.println("用户:"+userPhone+"  取消预约");
         String res=orderService.deleteOrderByPhoneFunction(userPhone);
         System.out.println("res:"+res);
         return res;

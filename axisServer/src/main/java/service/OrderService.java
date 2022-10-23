@@ -65,7 +65,7 @@ public class OrderService {
             sqlSession.commit();
             return "取消预约成功";
         }
-        return "无效号码";
+        return "此号码尚未预约";
     }
 
 

@@ -20,6 +20,7 @@ public class OrderService {
 
     @SneakyThrows
     public String deleteOrderByPhoneFunction(String userPhone){
+        System.out.println("开始远程调用: "+deleteOrderByPhone);
         Object[] objects=new Object[]{userPhone};
         Service service = new Service();
         Call call = (Call) service.createCall();
@@ -32,6 +33,7 @@ public class OrderService {
 
     @SneakyThrows
     public String insertOrderFunction(String userPhone,String dateString,String department){
+        System.out.println("开始远程调用:"+insertOrder);
         Object[] objects=new Object[]{userPhone,dateString,department};
         Service service = new Service();
         Call call = (Call) service.createCall();

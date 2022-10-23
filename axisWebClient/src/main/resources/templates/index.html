@@ -20,12 +20,15 @@
         <br/>1.输入的日期在两天以内
         <br/>2.若系统无反应，请检查输入数据是否正确
         <br/>3.本项目没有对输入的数据进行校验，不太稳定
+        <br/>
+        <br/>
+        <b>使用步骤:先输入日期和科室查询是否有剩余号；若有剩余号，输入手机号预约；</b>
 
       </p>
     </div>
   </div>
   <div class="row clearfix">
-    <div class="col-md-6 column">
+    <div class="col-md-6 column" >
       <h3 class="text-center">
         查询可预约号
       </h3>
@@ -44,19 +47,16 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
-              <label><input type="checkbox" />记住我</label>
-            </div>
+            <button type="button" class="btn btn-default btn-primary" onclick="button_findNumCLick()">查询</button>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="button" class="btn btn-default" onclick="button_findNumCLick()">查询</button>
+          <div class="col-sm-offset-2 col-sm-10" style="margin-top: 10px">
+            <button type="button" class="btn btn-default btn-danger" onclick="openCancelForm()">我要取消预约</button>
           </div>
         </div>
       </form>
     </div>
-    <div class="col-md-6 column">
+
+    <div class="col-md-6 column" id="orderForm" hidden="hidden">
       <h3 class="text-center">
         可以预约，输入手机号
       </h3>
@@ -69,19 +69,33 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
-              <label><input type="checkbox" />记住我</label>
-            </div>
+            <button type="button" class="btn btn-default" id="button_Order" onclick="button_OrderFunction()">点我预约</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+
+    <div class="col-md-6 column" id="cancelOrderForm" hidden="hidden">
+      <h3 class="text-center">
+        请输入取消预约手机号
+      </h3>
+      <form class="form-horizontal" role="form" name="cancelForm">
+        <div class="form-group">
+          <label class="col-sm-2 control-label">用户电话</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="cancelPhone" name="cancelPhone" placeholder="请输入用户电话"/>
           </div>
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="button" class="btn btn-default" id="button_Order" onclick="button_OrderFunction()">点我预约</button>
             <button type="button" class="btn btn-default" id="button_CancelOrder" onclick="button_CancelOrderFunction()">取消预约</button>
           </div>
         </div>
       </form>
     </div>
+
+
   </div>
 </div>
 
@@ -92,14 +106,25 @@
       "dateString": form1.date.value ,
       "department": form1.department.value
     }
+    if(data.dateString===""){
+      alert("请输入日期")
+      return;
+    }
     if(daysDistance(today(),data.dateString)>2){
       console.log(daysDistance(today(),data.dateString))
-      alert("不在预定日期内")
+      alert("不在预定日期内,只能预约今天，明天和后天的号码")
+      return;
+    }
+    if(data.department === ""){
+      alert("请输入科室")
       return;
     }
     $.post("/queryRegistrationByDateAndDepartment",data,function(data,status){
       console.log(data)
       alert(data);
+      if(data==="可以预约，请输入手机号预约"){
+        $("#orderForm").show()
+      }
     })
   }
 
@@ -120,12 +145,18 @@
 
     $.post("/insertOrderFunction",data,function(data,status){
       alert(data);
+      if(data==="预约成功"){
+        $("#orderForm").hide()
+      }
     })
   }
 
+  function openCancelForm() {
+    $("#cancelOrderForm").show()
+  }
   function button_CancelOrderFunction() {
     var data={
-      "userPhone": form2.userPhone.value
+      "userPhone": cancelForm.cancelPhone.value
     }
 
     if(!validatePhone(data.userPhone)){
@@ -136,6 +167,10 @@
     $.post("/deleteOrderByPhoneFunction",data,function(data,status){
       console.log(data)
       alert(data);
+
+      if(data==="取消预约成功"){
+        $("#cancelOrderForm").hide()
+      }
     })
   }
 

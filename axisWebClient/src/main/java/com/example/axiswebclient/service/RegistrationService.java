@@ -19,6 +19,11 @@ public class RegistrationService {
 
     @SneakyThrows
     public String queryRegistrationByDateAndDepartmentFunction(String dateString,String department) {
+        if(dateString.equals(""))
+            return "日期格式错误,";
+        else if(department.equals(""))
+            return "请输入科室信息";
+        System.out.println("开始远程调用 "+queryRegistrationByDateAndDepartment);
         Object objects[]=new Object[]{dateString,department};
         Service service = new Service();
         Call call = (Call) service.createCall();
