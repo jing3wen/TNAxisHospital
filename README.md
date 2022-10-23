@@ -2,7 +2,7 @@
 
 #### 使用说明（看到有人fork了就更新了一波 :v: ）
 
-### 关于如何运行这个项目我写了一个word文档，在仓库里面[如何运行该项目.docx](https://gitee.com/jing3wen/TNAxisHospital/blob/master/%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%E8%AF%A5%E9%A1%B9%E7%9B%AE.docx)，建议直接看word文档，先把代码跑起来，再去看下面的博客了解如何搭建的
+### 关于如何运行这个项目我写了一个word文档[如何运行该项目.docx](https://gitee.com/jing3wen/TNAxisHospital/blob/master/%E5%A6%82%E4%BD%95%E8%BF%90%E8%A1%8C%E8%AF%A5%E9%A1%B9%E7%9B%AE.docx)，建议直接看word文档，先把代码跑起来，再去看下面的博客了解如何搭建的
 
 ### 关于这个项目本人写了个博客
 https://www.cnblogs.com/jwAItn/articles/15530103.html
