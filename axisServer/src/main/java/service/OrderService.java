@@ -62,6 +62,8 @@ public class OrderService {
             //System.out.println(order.toString());
             //说明该用户已经预约，准备取消预约
             orderMapper.delectOrderById(order.getId());
+
+            registrationMapper.updateRemainingWhenDeleteOrder(order.getRegistrationId());
             sqlSession.commit();
             return "取消预约成功";
         }

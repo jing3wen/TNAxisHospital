@@ -23,4 +23,6 @@ public interface RegistrationMapper {
     Registration queryRegistrationByDateAndDepartment(@Param("date") Date date,@Param("department") String department);
 
     int updateRemainingWhenInsertOrder(Integer registrationId);
+
+    int updateRemainingWhenDeleteOrder(Integer registrationId);
 }

@@ -10,8 +10,8 @@
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
                 <property name="url" value="${jdbc.url}"/>
-                <property name="username" value="root"/>
-                <property name="password" value="155416"/>
+                <property name="username" value="你的用户名"/>
+                <property name="password" value="你的密码"/>
             </dataSource>
         </environment>
     </environments>

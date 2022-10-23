@@ -134,4 +134,8 @@
   <update id="updateRemainingWhenInsertOrder">
     update `registration` set REMAINING=REMAINING-1 where ID=#{registrationId,jdbcType=INTEGER}
   </update>
+
+  <update id="updateRemainingWhenDeleteOrder">
+    update `registration` set REMAINING=REMAINING+1 where ID=#{registrationId,jdbcType=INTEGER}
+  </update>
 </mapper>
